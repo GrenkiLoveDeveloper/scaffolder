@@ -16,7 +16,8 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "pinia": ["node_modules/pinia"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "types": ["vite/client"]

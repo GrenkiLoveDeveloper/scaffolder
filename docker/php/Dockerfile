@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine as build
+FROM php:8.3-fpm-alpine AS build
 
 # Определяем аргументы user и uid, которые можно передать при сборке образа
 ARG user
