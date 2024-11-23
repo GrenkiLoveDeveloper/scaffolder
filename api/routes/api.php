@@ -11,4 +11,4 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/login', LoginController::class)->middleware('guest');
-// Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');
+Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');
