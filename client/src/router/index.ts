@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
+import { useAuthStore } from '@/stores/authStore';
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/LoginView.vue'),
   },
   {
     path: '/about',
@@ -20,19 +26,19 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach(async (to, from, next) => {
-//   const notAuthPages = ['/login'];
+router.beforeEach(async (to, from, next) => {
+  const notAuthPages = ['/login'];
 
-//   const authStore = useAuthStore();
+  const authStore = useAuthStore();
 
-//   if (!authStore.isAuthenticated && !notAuthPages.includes(to.path)) {
-//     next('/login');
-//     return;
-//   } else if (authStore.isAuthenticated && notAuthPages.includes(to.path)) {
-//     next('/');
-//     return;
-//   }
-//   next();
-// });
+  if (!authStore.isAuthenticated.value && !notAuthPages.includes(to.path)) {
+    next('/login');
+    return;
+  } else if (authStore.isAuthenticated.value && notAuthPages.includes(to.path)) {
+    next('/');
+    return;
+  }
+  next();
+});
 
 export default router;

@@ -19,11 +19,11 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request): JsonResponse
     {
-        dd('123');
         try {
             $credentials = [
-                'samaccountname' => $request->login,
+                'login' => $request->login,
                 'password' => $request->password,
+                'deleted_at' => null
             ];
 
             if (!Auth::attempt($credentials)) {
@@ -33,16 +33,16 @@ class LoginController extends Controller
             /** @var \App\Models\User|null $user */
             $user = Auth::user();
             $token = $user->createToken('authToken')->plainTextToken;
-            // $userData = $this->userRepository->getUserWithPhoto($user->id);
 
             return response()->json([
-                'user' => $userData,
+                'user' => $user,
                 'message' => __('auth.success'),
                 'token' => $token,
             ], Response::HTTP_OK);
+
         } catch (Throwable $e) {
             return response()->json([
-                'message' => __('auth.error'),
+                'message' => $e->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

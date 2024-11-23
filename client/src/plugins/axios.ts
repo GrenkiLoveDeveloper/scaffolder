@@ -39,10 +39,10 @@ axios.interceptors.response.use(
 
     console.log(message);
 
-    if (status == UNAUTHORIZED || status == UNAUTHENTICATED) {
-      remove('token');
-      window.location.reload();
-    }
+    // if (status == UNAUTHORIZED || status == UNAUTHENTICATED) {
+    //   remove('token');
+    //   window.location.reload();
+    // }
 
     throw error;
   },
