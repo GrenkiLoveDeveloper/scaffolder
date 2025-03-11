@@ -2,8 +2,7 @@ import axios from 'axios';
 import { useLocalStorage } from '@/composables/useLocalStorage';
 
 const { get, remove } = useLocalStorage();
-const UNAUTHORIZED = 401;
-const UNAUTHENTICATED = 419;
+import { UNAUTHORIZED, PAGE_EXPIRED } from '@/helpers/constants';
 
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND;
@@ -39,7 +38,7 @@ axios.interceptors.response.use(
 
     console.log(message);
 
-    if (status == UNAUTHORIZED || status == UNAUTHENTICATED) {
+    if (status == UNAUTHORIZED || status == PAGE_EXPIRED) {
       remove('token');
       // window.location.reload();
     }

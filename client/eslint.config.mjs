@@ -32,8 +32,8 @@ export default [
       },
 
       parser: parser,
-      ecmaVersion: 5,
-      sourceType: 'commonjs',
+      ecmaVersion: 15,
+      sourceType: 'module',
 
       parserOptions: {
         parser: '@typescript-eslint/parser',

@@ -38,6 +38,7 @@ export const useAuthStore = () => {
       state.userId = user.user.id;
       set('token', user.token);
       set('userId', user.user.id.toString());
+      set('timezone', Intl.DateTimeFormat().resolvedOptions().timeZone);
       await router.push('/');
     } catch (error) {
       console.log(error);
